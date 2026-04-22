@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NOCTERA STORE</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #0a0a0a;
+      color: #eaeaea;
+    }
+
+    header {
+      text-align: center;
+      padding: 30px 0;
+      font-size: 20px;
+      letter-spacing: 4px;
+      opacity: 0.8;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from {opacity: 0; transform: translateY(-10px);} 
+      to {opacity: 0.8; transform: translateY(0);} 
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .gallery {
+      display: flex;
+      overflow-x: auto;
+      gap: 10px;
+      scroll-behavior: smooth;
+    }
+
+    .gallery img {
+      width: 100%;
+      max-width: 300px;
+      border-radius: 10px;
+    }
+
+    .buttons {
+      margin-top: 20px;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px 20px;
+      background: #111;
+      border: 1px solid #444;
+      color: #fff;
+      cursor: pointer;
+      border-radius: 6px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #222;
+    }
+
+    .order {
+      margin-top: 20px;
+      background: #1a1a1a;
+      border: 1px solid #888;
+    }
+
+    .size-guide {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 10px 15px;
+      border: 1px solid #888;
+      border-radius: 20px;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% {box-shadow: 0 0 5px #888;}
+      50% {box-shadow: 0 0 15px #fff;}
+      100% {box-shadow: 0 0 5px #888;}
+    }
+
+    .size-section {
+      margin-top: 80px;
+    }
+
+    .size-section img {
+      width: 100%;
+      border-radius: 10px;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="size-guide" onclick="document.getElementById('sizes').scrollIntoView({behavior:'smooth'})">
+    Size Guide
+  </div>
+
+  <header>NOCTERA STORE</header>
+
+  <div class="container">
+
+    <div class="gallery">
+      <img src="black.jpg">
+      <img src="white.jpg">
+      <img src="red.jpg">
+    </div>
+
+    <div class="buttons">
+      <button onclick="selectColor('Black')">Black</button>
+      <button onclick="selectColor('White')">White</button>
+      <button onclick="selectColor('Red')">Red</button>
+    </div>
+
+    <div class="buttons">
+      <button onclick="selectSize('S')">S</button>
+      <button onclick="selectSize('M')">M</button>
+      <button onclick="selectSize('L')">L</button>
+      <button onclick="selectSize('XL')">XL</button>
+    </div>
+
+    <button class="order" onclick="order()">Заказать</button>
+
+    <div id="sizes" class="size-section">
+      <h3>Размерная сетка</h3>
+      <img src="size.jpg">
+    </div>
+
+  </div>
+
+  <script>
+    let selectedColor = '';
+    let selectedSize = '';
+
+    function selectColor(color) {
+      selectedColor = color;
+      alert('Выбран цвет: ' + color);
+    }
+
+    function selectSize(size) {
+      selectedSize = size;
+      alert('Выбран размер: ' + size);
+    }
+
+    function order() {
+      if (!selectedColor || !selectedSize) {
+        alert('Выберите цвет и размер');
+        return;
+      }
+      window.location.href = 'https://t.me/your_username';
+    }
+  </script>
+
+</body>
+</html>

@@ -4,160 +4,240 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NOCTERA STORE</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
   <style>
+    * { box-sizing: border-box; }
+
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0a0a0a;
+      font-family: 'Inter', sans-serif;
+      background: radial-gradient(circle at top, #111, #050505);
       color: #eaeaea;
+      text-align: center;
     }
 
     header {
-      text-align: center;
-      padding: 30px 0;
-      font-size: 20px;
-      letter-spacing: 4px;
-      opacity: 0.8;
-      animation: fadeIn 2s ease-in-out;
+      padding: 40px 0 20px;
+      font-size: 18px;
+      letter-spacing: 6px;
+      opacity: 0;
+      animation: fadeSlide 1.5s ease forwards;
     }
 
-    @keyframes fadeIn {
-      from {opacity: 0; transform: translateY(-10px);} 
-      to {opacity: 0.8; transform: translateY(0);} 
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(-20px);} 
+      to { opacity: 0.7; transform: translateY(0);} 
     }
 
     .container {
       max-width: 900px;
       margin: auto;
       padding: 20px;
-      text-align: center;
     }
 
-    .gallery {
-      display: flex;
-      overflow-x: auto;
-      gap: 10px;
-      scroll-behavior: smooth;
-    }
-
-    .gallery img {
+    .product img {
       width: 100%;
-      max-width: 300px;
-      border-radius: 10px;
+      max-width: 320px;
+      border-radius: 16px;
+      transition: opacity 0.4s ease;
     }
 
-    .buttons {
-      margin-top: 20px;
-    }
+    .buttons { margin-top: 20px; }
 
     button {
-      margin: 5px;
-      padding: 10px 20px;
-      background: #111;
+      margin: 6px;
+      padding: 10px 18px;
+      background: transparent;
       border: 1px solid #444;
-      color: #fff;
+      color: #ddd;
       cursor: pointer;
-      border-radius: 6px;
-      transition: 0.3s;
+      border-radius: 8px;
+      transition: all 0.25s ease;
     }
 
     button:hover {
-      background: #222;
+      border-color: #888;
+      color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .active {
+      border-color: #fff;
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+    }
+
+    .selected {
+      margin-top: 15px;
+      font-size: 14px;
+      opacity: 0.7;
     }
 
     .order {
-      margin-top: 20px;
-      background: #1a1a1a;
-      border: 1px solid #888;
+      margin-top: 25px;
+      padding: 14px 28px;
+      border-radius: 12px;
+      border: 1px solid #aaa;
+      background: linear-gradient(145deg, #111, #1c1c1c);
+      transition: 0.3s;
+    }
+
+    .order:hover {
+      box-shadow: 0 0 25px rgba(255,255,255,0.2);
+      transform: scale(1.03);
+    }
+
+    .order:active {
+      transform: scale(0.97);
     }
 
     .size-guide {
       position: fixed;
       top: 20px;
       right: 20px;
-      padding: 10px 15px;
-      border: 1px solid #888;
-      border-radius: 20px;
+      padding: 10px 16px;
+      border: 1px solid #777;
+      border-radius: 30px;
+      font-size: 13px;
       animation: pulse 2s infinite;
+      cursor: pointer;
     }
 
     @keyframes pulse {
-      0% {box-shadow: 0 0 5px #888;}
-      50% {box-shadow: 0 0 15px #fff;}
-      100% {box-shadow: 0 0 5px #888;}
+      0% { box-shadow: 0 0 0 rgba(255,255,255,0.2);} 
+      50% { box-shadow: 0 0 20px rgba(255,255,255,0.4);} 
+      100% { box-shadow: 0 0 0 rgba(255,255,255,0.2);} 
     }
 
     .size-section {
-      margin-top: 80px;
+      margin-top: 120px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: 0.8s ease;
+    }
+
+    .size-section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .size-section img {
       width: 100%;
-      border-radius: 10px;
+      border-radius: 14px;
+      margin-top: 15px;
     }
 
   </style>
 </head>
 <body>
 
-  <div class="size-guide" onclick="document.getElementById('sizes').scrollIntoView({behavior:'smooth'})">
-    Size Guide
+<div class="size-guide" onclick="scrollToSizes()">Size Guide</div>
+
+<header>NOCTERA STORE</header>
+
+<div class="container">
+
+  <div class="product">
+    <img id="mainImage" src="black.jpg">
   </div>
 
-  <header>NOCTERA STORE</header>
-
-  <div class="container">
-
-    <div class="gallery">
-      <img src="black.jpg">
-      <img src="white.jpg">
-      <img src="red.jpg">
-    </div>
-
-    <div class="buttons">
-      <button onclick="selectColor('Black')">Black</button>
-      <button onclick="selectColor('White')">White</button>
-      <button onclick="selectColor('Red')">Red</button>
-    </div>
-
-    <div class="buttons">
-      <button onclick="selectSize('S')">S</button>
-      <button onclick="selectSize('M')">M</button>
-      <button onclick="selectSize('L')">L</button>
-      <button onclick="selectSize('XL')">XL</button>
-    </div>
-
-    <button class="order" onclick="order()">Заказать</button>
-
-    <div id="sizes" class="size-section">
-      <h3>Размерная сетка</h3>
-      <img src="size.jpg">
-    </div>
-
+  <div class="buttons" id="colors">
+    <button onclick="selectColor(this,'black.jpg','Black')">Black</button>
+    <button onclick="selectColor(this,'red.jpg','Red')">Red</button>
+    <button onclick="selectColor(this,'blue.jpg','Blue')">Blue</button>
+    <button onclick="selectColor(this,'pink.jpg','Pink')">Pink</button>
+    <button onclick="selectColor(this,'white.jpg','White')">White</button>
+    <button onclick="selectColor(this,'yellow.jpg','Yellow')">Yellow</button>
+    <button onclick="selectColor(this,'mint.jpg','Mint')">Mint</button>
   </div>
 
-  <script>
-    let selectedColor = '';
-    let selectedSize = '';
+  <div class="buttons" id="sizesBtns">
+    <button onclick="selectSize(this,'S')">S</button>
+    <button onclick="selectSize(this,'M')">M</button>
+    <button onclick="selectSize(this,'L')">L</button>
+    <button onclick="selectSize(this,'XL')">XL</button>
+  </div>
 
-    function selectColor(color) {
-      selectedColor = color;
-      alert('Выбран цвет: ' + color);
-    }
+  <div class="selected" id="selectedText">Выберите цвет и размер</div>
 
-    function selectSize(size) {
-      selectedSize = size;
-      alert('Выбран размер: ' + size);
-    }
+  <button class="order" onclick="order()">Заказать</button>
 
-    function order() {
-      if (!selectedColor || !selectedSize) {
-        alert('Выберите цвет и размер');
-        return;
-      }
-      window.location.href = 'https://t.me/your_username';
-    }
-  </script>
+  <div id="sizes" class="size-section">
+    <h3>Размерная сетка</h3>
+    <img src="size.jpg">
+  </div>
+
+</div>
+
+<script>
+let selectedColor = null;
+let selectedSize = null;
+
+function clearActive(group) {
+  group.querySelectorAll('button').forEach(btn => btn.classList.remove('active'));
+}
+
+function updateText() {
+  const text = document.getElementById('selectedText');
+  if (selectedColor && selectedSize) {
+    text.innerText = `${selectedColor} / ${selectedSize}`;
+  }
+}
+
+function selectColor(el, img, colorName) {
+  selectedColor = colorName;
+
+  const image = document.getElementById('mainImage');
+  image.style.opacity = 0;
+
+  setTimeout(() => {
+    image.src = img;
+    image.style.opacity = 1;
+  }, 200);
+
+  const group = document.getElementById('colors');
+  clearActive(group);
+  el.classList.add('active');
+
+  updateText();
+}
+
+function selectSize(el, size) {
+  selectedSize = size;
+
+  const group = document.getElementById('sizesBtns');
+  clearActive(group);
+  el.classList.add('active');
+
+  updateText();
+}
+
+function order() {
+  if (!selectedColor || !selectedSize) {
+    alert('Выбери цвет и размер');
+    return;
+  }
+
+  const message = `NOCTERA STORE%0AЦвет: ${selectedColor}%0AРазмер: ${selectedSize}`;
+  const url = `https://t.me/your_username?text=${message}`;
+
+  window.location.href = url;
+}
+
+function scrollToSizes() {
+  document.getElementById('sizes').scrollIntoView({behavior:'smooth'});
+}
+
+window.addEventListener('scroll', () => {
+  const section = document.getElementById('sizes');
+  const rect = section.getBoundingClientRect();
+  if (rect.top < window.innerHeight - 100) {
+    section.classList.add('visible');
+  }
+});
+</script>
 
 </body>
 </html>

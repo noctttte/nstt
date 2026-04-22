@@ -227,28 +227,8 @@ function order() {
   window.location.href = url;
 }
 
-let lastScroll = 0;
-
-window.addEventListener('scroll', () => {
-  const currentScroll = window.scrollY;
-  const floatingBtn = document.querySelector('.size-guide');
-  const section = document.getElementById('sizes');
-  const rect = section.getBoundingClientRect();
-
-  // появление size section
-  if (rect.top < window.innerHeight - 100) {
-    section.classList.add('visible');
-  }
-
-  // логика кнопки (умная)
-  if (currentScroll > lastScroll && currentScroll > 80) {
-    floatingBtn.classList.add('visible'); // вниз
-  } else {
-    floatingBtn.classList.remove('visible'); // вверх
-  }
-
-  lastScroll = currentScroll;
-});
+function scrollToSizes() {
+  document.getElementById('sizes').scrollIntoView({behavior:'smooth'});
 }
 
 window.addEventListener('scroll', () => {

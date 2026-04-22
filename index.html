@@ -126,9 +126,19 @@
 
     .size-section img {
       width: 100%;
+      max-width: 500px;
       border-radius: 14px;
       margin-top: 15px;
+
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.6s ease;
     }
+
+.size-section.visible img {
+  opacity: 1;
+  transform: scale(1);
+}
 
   </style>
 </head>

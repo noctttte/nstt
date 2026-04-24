@@ -106,6 +106,31 @@
       z-index: 9999;
     }
 
+    .size-calc {
+  margin-top: 30px;
+}
+
+.size-calc input {
+  display: block;
+  width: 100%;
+  max-width: 250px;
+  margin: 8px auto;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #111;
+  color: #fff;
+}
+
+.size-calc button {
+  margin-top: 10px;
+}
+
+#resultSize {
+  margin-top: 15px;
+  font-size: 16px;
+}
+    
     @keyframes pulse {
       0% { box-shadow: 0 0 0 rgba(255,255,255,0.2);} 
       50% { box-shadow: 0 0 20px rgba(255,255,255,0.4);} 
@@ -189,6 +214,8 @@
 
   <div class="selected" id="selectedText">Выберите цвет и размер</div>
 
+  <div id="sizes" class="size-section">
+    
   <div class="price">990грн</div>
 
   <button class="order" onclick="order()">Заказать</button>
@@ -198,6 +225,17 @@
     <img src="size.jpg">
   </div>
 
+    <div class="size-calc">
+  <h4>Подобрать размер</h4>
+
+  <input type="number" id="chest" placeholder="Обхват груди (см)">
+  <input type="number" id="waist" placeholder="Обхват талии (см)">
+  <input type="number" id="hips" placeholder="Обхват бедер (см)">
+
+  <button onclick="calculateSize()">Подобрать</button>
+
+  <div id="resultSize"></div>
+    
 </div>
 
 <script>
@@ -250,6 +288,30 @@ function selectColor(el, img, colorName) {
   updateText();
 }
 
+  function calculateSize() {
+  const chest = parseInt(document.getElementById('chest').value);
+  const waist = parseInt(document.getElementById('waist').value);
+  const hips = parseInt(document.getElementById('hips').value);
+
+  let size = '';
+
+  // простая логика (можно потом подкрутить под твой товар)
+  if (chest <= 90 && waist <= 70 && hips <= 95) {
+    size = 'S';
+  } else if (chest <= 100 && waist <= 80 && hips <= 105) {
+    size = 'M';
+  } else if (chest <= 110 && waist <= 90 && hips <= 115) {
+    size = 'L';
+  } else {
+    size = 'XL';
+  }
+
+  document.getElementById('resultSize').innerText = `Ваш размер: ${size}`;
+
+  // авто-выбор на сайте 🔥
+  selectedSize = size;
+}
+  
 function selectSize(el, size) {
   selectedSize = size;
 

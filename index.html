@@ -144,6 +144,15 @@
       transition: 0.8s ease;
     }
 
+
+    .active {
+  border-color: #fff;
+  background: rgba(255,255,255,0.15);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(255,255,255,0.3);
+    }
+
+    
     .price {
       margin-top: 10px;
       font-size: 20px;
@@ -287,14 +296,13 @@ function selectColor(el, img, colorName) {
   updateText();
 }
 
-  function calculateSize() {
+function calculateSize() {
   const chest = parseInt(document.getElementById('chest').value);
   const waist = parseInt(document.getElementById('waist').value);
   const hips = parseInt(document.getElementById('hips').value);
 
   let size = '';
 
-  // простая логика (можно потом подкрутить под твой товар)
   if (chest <= 90 && waist <= 70 && hips <= 95) {
     size = 'S';
   } else if (chest <= 100 && waist <= 80 && hips <= 105) {
@@ -305,10 +313,27 @@ function selectColor(el, img, colorName) {
     size = 'XL';
   }
 
-  document.getElementById('resultSize').innerText = `Ваш размер: ${size}`;
+  // 🔥 ПОДСВЕТКА КНОПКИ
+  const group = document.getElementById('sizesBtns');
+  const buttons = group.querySelectorAll('button');
 
-  // авто-выбор на сайте 🔥
+  buttons.forEach(btn => {
+    btn.classList.remove('active');
+
+    if (btn.innerText === size) {
+      btn.classList.add('active');
+    }
+  });
+
+  // сохраняем выбор
   selectedSize = size;
+
+  // текст результата (улучшенный)
+  document.getElementById('resultSize').innerText =
+    `Рекомендуем размер: ${size} (идеально подходит)`;
+
+  // обновляем основной текст
+  updateText();
 }
   
 function selectSize(el, size) {

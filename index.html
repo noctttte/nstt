@@ -205,27 +205,27 @@
     <button onclick="selectColor(this,'mint.jpg','Mint')">Mint</button>
   </div>
 
-  <div class="buttons" id="sizesBtns">
-    <button onclick="selectSize(this,'S')">S</button>
-    <button onclick="selectSize(this,'M')">M</button>
-    <button onclick="selectSize(this,'L')">L</button>
-    <button onclick="selectSize(this,'XL')">XL</button>
-  </div>
+<div class="buttons" id="sizesBtns">
+  <button onclick="selectSize(this,'S')">S</button>
+  <button onclick="selectSize(this,'M')">M</button>
+  <button onclick="selectSize(this,'L')">L</button>
+  <button onclick="selectSize(this,'XL')">XL</button>
+</div>
 
-  <div class="selected" id="selectedText">Выберите цвет и размер</div>
+<div class="selected" id="selectedText">Выберите цвет и размер</div>
 
-  <div id="sizes" class="size-section">
-    
-  <div class="price">990грн</div>
+<div class="price">990 грн</div>
 
-  <button class="order" onclick="order()">Заказать</button>
+<button class="order" onclick="order()">Заказать</button>
 
-  <div id="sizes" class="size-section">
-    <h3>Размерная сетка</h3>
-    <img src="size.jpg">
-  </div>
+<!-- РАЗМЕРНАЯ СЕТКА -->
+<div id="sizes" class="size-section">
+  <h3>Размерная сетка</h3>
+  <img src="size.jpg">
+</div>
 
-    <div class="size-calc">
+<!-- КАЛЬКУЛЯТОР -->
+<div class="size-calc">
   <h4>Подобрать размер</h4>
 
   <input type="number" id="chest" placeholder="Обхват груди (см)">
@@ -235,7 +235,6 @@
   <button onclick="calculateSize()">Подобрать</button>
 
   <div id="resultSize"></div>
-    
 </div>
 
 <script>

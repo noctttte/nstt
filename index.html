@@ -110,6 +110,14 @@
   margin-top: 30px;
 }
 
+
+.limited {
+  margin-left: 6px;
+  font-size: 11px;
+  color: #ff4d4d;
+  opacity: 0.9;
+  letter-spacing: 0.5px;
+}
 .size-calc input {
   display: block;
   width: 100%;
@@ -205,7 +213,9 @@
   </div>
 
   <div class="buttons" id="colors">
-    <button onclick="selectColor(this,'black.jpg','Black')">Чорний</button>
+    <button onclick="selectColor(this,'black.jpg','Black')">
+       Black <span class="limited">осталось 4</span>
+    </button>
     <button onclick="selectColor(this,'red.jpg','Red')">Червоний</button>
     <button onclick="selectColor(this,'blue.jpg','Blue')">Синiй</button>
     <button onclick="selectColor(this,'pink.jpg','Pink')">Рожевий</button>
